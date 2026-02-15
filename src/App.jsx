@@ -6,6 +6,10 @@ import Login from './pages/Login'
 import  Register from './pages/Register'
 import ConfirmEmail from './pages/ConfirmEmail'
 import ResetPassword from './pages/ResetPassword'
+import Profile from './pages/Profile'
+import Notifications from './pages/Notifications'
+import NotFound from './pages/NotFound'
+import ErrorPage from './pages/ErrorPage'
 
 function App() {
 
@@ -17,6 +21,12 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/confirm-email" element={<ConfirmEmail />} />
         <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/notifications" element={<Notifications />} />
+        <Route path="*" element={<NotFound />} />
+        <Route path="/error" element={<ErrorPage />} />
+
+
       </Routes>
 
     </>
