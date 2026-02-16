@@ -1,5 +1,5 @@
 import React from "react"
-import { Link } from "react-router-dom"
+import { Link } from "react-router"
 import Card from "../components/Card"
 import Button from "../components/Button"
 import { MailCheck } from "lucide-react"
@@ -21,8 +21,8 @@ export default function ConfirmEmail() {
             Cliquez sur le lien pour activer votre compte.
           </p>
 
-          <Button variant="primary" size="lg" className="w-full">
-            <Link to="/login">Retour à la connexion</Link>
+          <Button variant="primary" size="lg" className="w-full" as={Link} to="/login">
+            Retour à la connexion
           </Button>
         </Card>
 

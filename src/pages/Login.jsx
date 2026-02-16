@@ -2,7 +2,7 @@ import React from "react"
 import Card from "../components/Card"
 import Button from "../components/Button"
 import Badge from "../components/Badge"
-import { Link } from "react-router-dom"
+import { Link } from "react-router"
 import { Mail, Lock, LogIn } from "lucide-react"
 
 export default function Login() {

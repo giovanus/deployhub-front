@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Link } from 'react-router'
 import Button from '../components/Button'
 import Card from '../components/Card'
 import Badge from '../components/Badge'
-import { Rocket, Activity, Shield, Zap, DollarSign, GitBranch, ArrowRight, BookOpen } from 'lucide-react'
+import { Rocket, Activity, Shield, Zap, DollarSign, GitBranch, ArrowRight, BookOpen, Menu, X } from 'lucide-react'
 
 export default function Home() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const features = [
     {
       icon: Rocket,
@@ -97,17 +99,115 @@ export default function Home() {
               </a>
             </div>
             
-            <div className="flex items-center gap-4">
-              <Button variant="ghost" size="sm">
+            <div className="hidden md:flex items-center gap-4">
+              <Button variant="ghost" size="sm" as={Link} to="/login">
                 Connexion
               </Button>
-              <Button variant="primary" size="sm">
+              <Button variant="primary" size="sm" as={Link} to="/register">
+                Démarrer
+              </Button>
+            </div>
+
+            {/* Menu Hamburger (Mobile) */}
+            <button 
+              onClick={() => setIsMenuOpen(true)}
+              className="md:hidden p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+              aria-label="Ouvrir le menu"
+            >
+              <Menu className="w-6 h-6" />
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      {/* Menu Mobile Glissant */}
+      <div className={`fixed inset-0 z-50 md:hidden transition-opacity duration-300 ${isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+        {/* Overlay */}
+        <div 
+          onClick={() => setIsMenuOpen(false)}
+          className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+        />
+        
+        {/* Menu Panel */}
+        <div className={`absolute right-0 top-0 h-full w-80 max-w-[85vw] bg-white shadow-2xl transform transition-transform duration-300 ease-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+          <div className="flex flex-col h-full">
+            {/* Header */}
+            <div className="flex items-center justify-between p-6 border-b border-gray-200">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 bg-linear-to-br from-emerald-500 to-emerald-600 rounded-lg flex items-center justify-center text-white font-bold">
+                  D
+                </div>
+                <span className="text-xl font-bold text-gray-900">DeployHub</span>
+              </div>
+              <button 
+                onClick={() => setIsMenuOpen(false)}
+                className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+                aria-label="Fermer le menu"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+
+            {/* Navigation Links */}
+            <nav className="flex-1 overflow-y-auto p-6">
+              <div className="space-y-1">
+                <a 
+                  href="#features" 
+                  onClick={() => setIsMenuOpen(false)}
+                  className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors font-medium"
+                >
+                  Fonctionnalités
+                </a>
+                <a 
+                  href="#how-it-works" 
+                  onClick={() => setIsMenuOpen(false)}
+                  className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors font-medium"
+                >
+                  Comment ça marche
+                </a>
+                <a 
+                  href="#" 
+                  onClick={() => setIsMenuOpen(false)}
+                  className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors font-medium"
+                >
+                  Documentation
+                </a>
+                <a 
+                  href="#" 
+                  onClick={() => setIsMenuOpen(false)}
+                  className="block px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors font-medium"
+                >
+                  Tarifs
+                </a>
+              </div>
+            </nav>
+
+            {/* Action Buttons */}
+            <div className="p-6 border-t border-gray-200 space-y-3">
+              <Button 
+                variant="ghost" 
+                size="md" 
+                className="w-full" 
+                as={Link} 
+                to="/login"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Connexion
+              </Button>
+              <Button 
+                variant="primary" 
+                size="md" 
+                className="w-full" 
+                as={Link} 
+                to="/register"
+                onClick={() => setIsMenuOpen(false)}
+              >
                 Démarrer
               </Button>
             </div>
           </div>
         </div>
-      </nav>
+      </div>
 
       {/* Hero Section */}
       <section className="px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
@@ -129,7 +229,7 @@ export default function Home() {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-            <Button variant="primary" size="lg">
+            <Button variant="primary" size="lg" as={Link} to="/register">
               <ArrowRight className="w-5 h-5" />
               Démarrer gratuitement
             </Button>
@@ -231,7 +331,7 @@ export default function Home() {
               Rejoignez les développeurs et équipes qui simplifient leurs déploiements avec DeployHub
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="secondary" size="lg">
+              <Button variant="secondary" size="lg" as={Link} to="/register">
                 Créer un compte
               </Button>
               <Button variant="outline" size="lg" className="border-white text-white hover:bg-emerald-400">

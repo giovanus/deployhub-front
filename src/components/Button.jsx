@@ -5,6 +5,7 @@ export default function Button({
   variant = 'primary', 
   size = 'md',
   className = '',
+  as: Component = 'button',
   ...props 
 }) {
   const baseClasses = 'font-medium rounded-lg transition-all duration-200 inline-flex items-center justify-center gap-2'
@@ -24,11 +25,11 @@ export default function Button({
   }
   
   return (
-    <button 
+    <Component 
       className={`${baseClasses} ${variants[variant]} ${sizes[size]} ${className}`}
       {...props}
     >
       {children}
-    </button>
+    </Component>
   )
 }
